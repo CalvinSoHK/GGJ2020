@@ -32,10 +32,13 @@ public class GameStateSystem : ScriptableObject
             switch(flag){
                 case GameEnum.Temperature:
                     value = settings.temperature;
+                    break;
                 case GameEnum.Brightness:
                     value = settings.brightness;
+                    break;
                 case GameEnum.Volume:
                     value = settings.volume;
+                    break;
                 default:
                     throw new System.Exception("Calvin: Enum has not yet been integrated into dictionary.");
             }
@@ -55,10 +58,13 @@ public class GameStateSystem : ScriptableObject
             switch(flag){
                 case GameEnum.Temperature:
                     value = settings.temperature;
+                    break;
                 case GameEnum.Brightness:
                     value = settings.brightness;
+                    break;
                 case GameEnum.Volume:
                     value = settings.volume;
+                    break;
                 default:
                     throw new System.Exception("Calvin: Enum has not yet been integrated into dictionary.");
             }

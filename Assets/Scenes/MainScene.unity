@@ -336,6 +336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateSystem: {fileID: 11400000, guid: 0092504b1c7a4a349a47f5aeaf0a802a, type: 2}
+  gameStateSystem: {fileID: 11400000, guid: 66f71732647287c43bf76f973c767cf5, type: 2}
 --- !u!4 &750344249
 Transform:
   m_ObjectHideFlags: 0
