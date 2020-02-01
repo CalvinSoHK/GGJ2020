@@ -5,7 +5,10 @@ using UnityEngine;
 /// <summary>
 /// Interface that forces a UI script to be able to send messages
 /// </summary>
-public class IMessagable
+public interface IMessagable
 {
-    //bool SendMessage()
+    /// <summary>
+    /// Sends message to gameStateManager, implemented especially for you.
+    /// <summary>
+    void SendMessage(GameStateSystem gameStateSystem);
 }

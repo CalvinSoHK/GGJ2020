@@ -14,6 +14,9 @@ public class GameStateSystem : ScriptableObject
     //Contains list of flags that are TRUE
     public Dictionary<GameEnum, float> game_dict = new Dictionary<GameEnum, float>();
 
+    //Contains solution for
+    public SettingsObject solution;
+
     public void InitDict(){
          GameEnum flag = GameEnum.Temperature;
          while(flag != GameEnum.Null){
@@ -32,10 +35,13 @@ public class GameStateSystem : ScriptableObject
             switch(flag){
                 case GameEnum.Temperature:
                     value = settings.temperature;
+                    break;
                 case GameEnum.Brightness:
                     value = settings.brightness;
+                    break;
                 case GameEnum.Volume:
                     value = settings.volume;
+                    break;
                 default:
                     throw new System.Exception("Calvin: Enum has not yet been integrated into dictionary.");
             }
@@ -55,10 +61,13 @@ public class GameStateSystem : ScriptableObject
             switch(flag){
                 case GameEnum.Temperature:
                     value = settings.temperature;
+                    break;
                 case GameEnum.Brightness:
                     value = settings.brightness;
+                    break;
                 case GameEnum.Volume:
                     value = settings.volume;
+                    break;
                 default:
                     throw new System.Exception("Calvin: Enum has not yet been integrated into dictionary.");
             }
