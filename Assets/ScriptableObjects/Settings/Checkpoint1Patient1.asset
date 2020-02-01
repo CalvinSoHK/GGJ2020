@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fa59af6db17faa46a1c34f520022f4a, type: 3}
-  m_Name: GameStateSystemSO
+  m_Script: {fileID: 11500000, guid: f283d0e96a0c47d48951f26b7abaf64d, type: 3}
+  m_Name: Checkpoint1Patient1
   m_EditorClassIdentifier: 
-  solution: {fileID: 11400000, guid: 31dbfda2e1ce455488c5f86a1b8526be, type: 2}
+  temperature: 80.8
+  brightness: 25.8
+  volume: 72.2

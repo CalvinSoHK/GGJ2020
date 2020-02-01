@@ -12,6 +12,9 @@ public class ResourceCache : Singleton<ResourceCache>
     [SerializeField]
     public StateSystem stateSystem;
 
+    [SerializeField]
+    public GameStateSystem gameStateSystem;
+
     void Start(){
         stateSystem.InitDict();
     }

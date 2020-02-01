@@ -14,6 +14,9 @@ public class GameStateSystem : ScriptableObject
     //Contains list of flags that are TRUE
     public Dictionary<GameEnum, float> game_dict = new Dictionary<GameEnum, float>();
 
+    //Contains solution for
+    public SettingsObject solution;
+
     public void InitDict(){
          GameEnum flag = GameEnum.Temperature;
          while(flag != GameEnum.Null){
