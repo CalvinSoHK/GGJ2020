@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f283d0e96a0c47d48951f26b7abaf64d, type: 3}
   m_Name: InitialSettings
   m_EditorClassIdentifier: 
-  temperature: 0
-  brightness: 0
-  volume: 0
+  temperature: 84.5
+  brightness: 54.3
+  volume: 9.9
