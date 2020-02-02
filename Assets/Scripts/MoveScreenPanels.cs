@@ -94,11 +94,6 @@ public class MoveScreenPanels : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         Vector2 panelDimensions = new Vector2(this.GetComponent<RectTransform>().sizeDelta.x, this.GetComponent<RectTransform>().sizeDelta.y);
         Vector2 screenDimensions = new Vector2(Screen.width, Screen.height);
 
-        Vector2 sizeDelta = GetComponent<RectTransform>().sizeDelta;
-        Vector2 canvasScale = new Vector2(this.GetComponentInParent<Canvas>().transform.localScale.x, this.GetComponentInParent<Canvas>().transform.localScale.y);
-
-        Vector2 finalScale = new Vector2(sizeDelta.x * canvasScale.x, sizeDelta.y * canvasScale.y);
-
         float x = panelPosition.x, y = panelPosition.y;
 
         if (panelPosition.x + (panelDimensions.x / 2) > screenDimensions.x)
