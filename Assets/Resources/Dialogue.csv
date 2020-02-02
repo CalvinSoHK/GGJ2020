@@ -17,15 +17,15 @@ Textline ID,Said by,Text,CheckPoint,Notes,Type,Special
 16,ShyRobot,It's nice you can hear me but... what do I even say...,One,Responses trying to explain the problem without being covered by UI,Linear,No
 17,ShyRobot,...Umm... Oh god you're looking at me...,One,Responses trying to explain the problem without being covered by UI,Linear,No
 18,ShyRobot,....! Please don't...,One,Responses trying to explain the problem without being covered by UI,Linear,No
-19,ShyRobot,... Uh... Hi...? Oh no I made the mad...,One,Responses trying to explain the problem without being covered by UI,Linear,No
+19,ShyRobot,... Uh... Hi...? Oh no I made them mad...,One,Responses trying to explain the problem without being covered by UI,Linear,No
 20,ShyRobot,Oh their UI is blocking me out! ,One,Response to behing covered by the UI,Linear,Ending
 21,ShyRobot,This is so much less nerve-wracking...,One,Response to behing covered by the UI,Linear,Ending
 22,ShyRobot,Maybe they'll help me out?,One,Response to behing covered by the UI,Linear,Ending
-23,Player,Can you stop being so rude?,One,Player response when the robot finishes this segment.,Player,Ending
-24,Player,Just get to the point please.,One,Player response when the robot finishes this segment.,Player,Ending
+23,Player,Help me better understand,One,Player response when the robot finishes this segment.,Player,Ending
+24,Player,Let's figure out what needs repairing'.,One,Player response when the robot finishes this segment.,Player,Ending
 25,Player,Go on... just tell me what's wrong.,One,Player response when the robot finishes this segment. Only available if UI covering the robot,Player,Ending
 26,ShyRobot,Well everything is just so much darker than I expected... Out here in the real world I mean.,Two,Responses when covered by UI in the third phase,Linear,No
-27,ShyRobot,There's just so much blood red everywhere!,Two,Responses when covered by UI in the third phase,Linear,No
+27,ShyRobot,There's just so much darkness everywhere!,Two,Responses when covered by UI in the third phase,Linear,No
 28,ShyRobot,I thought there'd be more light...,Two,Responses when covered by UI in the third phase,Linear,No
 29,ShyRobot,Maybe some more blues?,Two,Responses when covered by UI in the third phase,Linear,No
 30,ShyRobot,Is the world just that scary?,Two,Responses when covered by UI in the third phase,Linear,No
@@ -33,7 +33,7 @@ Textline ID,Said by,Text,CheckPoint,Notes,Type,Special
 32,ShyRobot,...Ummm.. how do I put this...,Two,Responses not covered by UI in the third phase.,Linear,No
 33,ShyRobot,...Why is everything so miserable...,Two,Responses not covered by UI in the third phase.,Linear,No
 34,ShyRobot,...Is it like this all the time?,Two,Responses not covered by UI in the third phase.,Linear,No
-35,ShyRobot,...Red...stress...,Two,Responses not covered by UI in the third phase.,Linear,No
+35,ShyRobot,...darkness...stress...,Two,Responses not covered by UI in the third phase.,Linear,No
 36,Player,Things are just like that all the time.,Two,Response at the end of third phase.,Player,Fail
 37,Player,Well things are better sometimes.,Two,Response at the end of the third phase.,Player,Fail
 38,Player,The world is definitely more fun! Just look around!,Two,Response at the end of the third phase after fixing brightness and color grading.,Player,Ending
@@ -41,7 +41,7 @@ Textline ID,Said by,Text,CheckPoint,Notes,Type,Special
 40,ShyRobot,Oh! It's... better!,Three,Response if player fixed brightness/color but not covering the patient.,End,Ending
 41,ShyRobot,...How do you deal with it?,Three,Response if the player only fixed the volume.,End,Ending
 42,Player,We all deal with it. Life is just dark.,Three,Response the player can choose if they only fixed volume.,Player,Ending
-43,Player ,Life can be happy even in the state it's in.,Three,Response the player can choose if they only fixed volume.,Player,Ending
+43,Player,Life can be happy even in the state it's in.,Three,Response the player can choose if they only fixed volume.,Player,Ending
 44,Player,The world is as it is. Nothing we can do about it.,Three,Response the player can choose if they only fixed volume.,Player,Ending
 45,Player,It's okay. Things are much brighter now.,Three,Response the player can choose if they fixed brightness/color but not covering the patient.,Player,Ending
 46,Player,Go on and enjoy those colors.,Three,Response the player can choose if they fixed brightness/color but not covering the patient.,Player,Ending
