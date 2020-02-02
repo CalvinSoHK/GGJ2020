@@ -42,6 +42,10 @@ public class MoveScreenPanels : MonoBehaviour, IPointerDownHandler, IPointerUpHa
             case PanelStates.CheckPosition:
                 this.RepositionObject();
                 this.setCurrentState(PanelStates.Stop);
+                if(this.transform.GetComponent<UIHoverEffect>() != null)
+                {
+                    this.transform.GetComponent<UIHoverEffect>().ResetOriginalPos();
+                }
                 break;
 
             case PanelStates.Stop:

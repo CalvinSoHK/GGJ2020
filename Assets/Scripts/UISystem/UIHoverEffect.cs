@@ -48,5 +48,6 @@ public class UIHoverEffect : MonoBehaviour
     ///<summary>
     public void ResetOriginalPos(){
         original_pos = transform.GetComponent<RectTransform>().localPosition;
+        target_pos = original_pos;
     }
 }
