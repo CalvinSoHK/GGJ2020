@@ -42,9 +42,11 @@ public class DialogueManager : MonoBehaviour
 
     public void createTheTextBoxes(string text)
     {
-        GameObject instance = Instantiate(WindowPrefab, new Vector3(Random.Range(0, Screen.width * 0.8f), Random.Range(0, Screen.height * 0.8f), 0), transform.rotation) as GameObject;
+        GameObject instance = Instantiate(WindowPrefab, new Vector3(Random.Range(0, Screen.width), Random.Range(0, Screen.height), 0), transform.rotation) as GameObject;
         instance.transform.parent = Canvas.transform;
         Transform t = instance.GetComponentInChildren<Transform>().Find("Text");
+
+        instance.GetComponent<MoveScreenPanels>().RepositionObject();
 
         t.gameObject.GetComponent<Text>().text = text;
         displayedText.Add(t.gameObject.GetComponent<Text>());
@@ -52,9 +54,11 @@ public class DialogueManager : MonoBehaviour
 
     public void createPlayerTextBoxes(string text)
     {
-        GameObject instance = Instantiate(PlayerWindowPrefab, new Vector3(Random.Range(0, Screen.width * 0.8f), Random.Range(0, Screen.height * 0.8f), 0), transform.rotation) as GameObject;
+        GameObject instance = Instantiate(PlayerWindowPrefab, new Vector3(Random.Range(0, Screen.width), Random.Range(0, Screen.height ), 0), transform.rotation) as GameObject;
         instance.transform.parent = Canvas.transform;
         Transform t = instance.GetComponentInChildren<Transform>().Find("Text");
+
+        instance.GetComponent<MoveScreenPanels>().RepositionObject();
 
         t.gameObject.GetComponent<Text>().text = text;
         displayedText.Add(t.gameObject.GetComponent<Text>());
