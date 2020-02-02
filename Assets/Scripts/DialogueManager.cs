@@ -11,6 +11,7 @@ public class DialogueManager : MonoBehaviour
     //Variables relevant to the current robot the player is dealing with
     public GameObject CurrentRobot;
     public GameObject WindowPrefab;
+    public GameObject PlayerWindowPrefab;
     public GameObject Canvas;
     public Text TextSize;
     private TestRobot CurrentRobotScript;
@@ -42,6 +43,16 @@ public class DialogueManager : MonoBehaviour
     public void createTheTextBoxes(string text)
     {
         GameObject instance = Instantiate(WindowPrefab, new Vector3(Random.Range(0, Screen.width * 0.8f), Random.Range(0, Screen.height * 0.8f), 0), transform.rotation) as GameObject;
+        instance.transform.parent = Canvas.transform;
+        Transform t = instance.GetComponentInChildren<Transform>().Find("Text");
+
+        t.gameObject.GetComponent<Text>().text = text;
+        displayedText.Add(t.gameObject.GetComponent<Text>());
+    }
+
+    public void createPlayerTextBoxes(string text)
+    {
+        GameObject instance = Instantiate(PlayerWindowPrefab, new Vector3(Random.Range(0, Screen.width * 0.8f), Random.Range(0, Screen.height * 0.8f), 0), transform.rotation) as GameObject;
         instance.transform.parent = Canvas.transform;
         Transform t = instance.GetComponentInChildren<Transform>().Find("Text");
 
