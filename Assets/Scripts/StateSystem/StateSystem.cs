@@ -24,6 +24,14 @@ public class StateSystem : ScriptableObject
          }
     }
 
+    public void ResetDict(){
+         FlagEnum flag = FlagEnum.Checkpoint1;
+         while(flag != FlagEnum.Null){
+            SetFlag(flag, false);
+            flag++;
+         }
+    }
+
     /// <summary>
     /// Sets the given flag to be true.
     /// <summary>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using GGJ2020.Utility;
+using UnityEngine.SceneManagement;
 
 public class RobotOne : MonoBehaviour, IPatient
 {
@@ -302,7 +303,7 @@ public class RobotOne : MonoBehaviour, IPatient
 
     public void Complete()
     {
-
+        SceneManager.LoadScene(3);
     }
 
     public bool isFirstCheckpoint()
