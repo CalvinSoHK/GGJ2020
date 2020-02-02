@@ -8,5 +8,7 @@ using UnityEngine.UI;
 /// </summary>
 public class RobotManager : MonoBehaviour
 {
+    //The interface we use to work with robots.
+    public IPatient patient;
 
 }
