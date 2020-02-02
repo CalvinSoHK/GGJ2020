@@ -2010,6 +2010,7 @@ GameObject:
   - component: {fileID: 1080901351}
   - component: {fileID: 1080901353}
   - component: {fileID: 1080901354}
+  - component: {fileID: 1080901355}
   m_Layer: 5
   m_Name: Head
   m_TagString: Untagged
@@ -2106,6 +2107,19 @@ MonoBehaviour:
   original_pos: {x: 0, y: 0}
   smooth: 0.4
   hover_strength: 100
+--- !u!114 &1080901355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080901349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ec774999cdc99044abaadf9cc630148, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  count_of_covers: 0
 --- !u!1 &1099116584
 GameObject:
   m_ObjectHideFlags: 0
