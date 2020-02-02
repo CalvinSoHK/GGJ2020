@@ -14,8 +14,8 @@ public class UIHoverEffect : MonoBehaviour
     private Vector2 target_pos;
     private Vector2 damp_velocity;
 
-    public float smooth = 0.5f;
-    public float hover_strength = 1f;
+    public float smooth = 1.5f;
+    public float hover_strength = 50f;
 
     void Start(){
         original_pos = transform.GetComponent<RectTransform>().localPosition;
@@ -41,5 +41,12 @@ public class UIHoverEffect : MonoBehaviour
     public void SetHover(bool value)
     {
         hoverEnabled = value;
+    }
+
+    ///<summary>
+    ///Needs to be called after being moved by player
+    ///<summary>
+    public void ResetOriginalPos(){
+        original_pos = transform.GetComponent<RectTransform>().localPosition;
     }
 }

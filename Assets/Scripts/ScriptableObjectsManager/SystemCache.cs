@@ -5,9 +5,9 @@ using UnityEngine;
 /// <summary>
 /// Loads all scriptable objects as references
 /// </summary>
-public class ResourceCache : Singleton<ResourceCache>
+public class SystemCache : Singleton<SystemCache>
 {
-    protected ResourceCache(){}
+    protected SystemCache(){}
 
     [SerializeField]
     public StateSystem stateSystem;
@@ -17,6 +17,7 @@ public class ResourceCache : Singleton<ResourceCache>
 
     void Start(){
         stateSystem.InitDict();
+        gameStateSystem.InitDict();
     }
 
 }

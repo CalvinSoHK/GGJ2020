@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class MoveScreenPanels : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public enum PanelStates { Idle, Clicked, Moving, CheckPosition, Stop }; //The states that could occur for the moving of the object
     public PanelStates currentPanelState;
+
+    //Used if assigned, otherwise ignored.
+    public RectTransform boundingImage;
  
     private Vector3 offset;
 
@@ -90,30 +94,61 @@ public class MoveScreenPanels : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     //If the panel ends up off screen we need to recenter it
     public void RepositionObject()
     {
-        Vector2 panelPosition = this.transform.position;
-        Vector2 panelDimensions = new Vector2(this.GetComponent<RectTransform>().sizeDelta.x, this.GetComponent<RectTransform>().sizeDelta.y);
-        Vector2 screenDimensions = new Vector2(Screen.width, Screen.height);
+        if(boundingImage == null){
+            Vector2 panelPosition = this.transform.position;
+            Vector2 panelDimensions = new Vector2(this.GetComponent<RectTransform>().sizeDelta.x, this.GetComponent<RectTransform>().sizeDelta.y);
+            Vector2 boundaryDimensions = new Vector2(Screen.width, Screen.height);
 
-        float x = panelPosition.x, y = panelPosition.y;
+            float x = panelPosition.x, y = panelPosition.y;
 
-        if (panelPosition.x + (panelDimensions.x / 2) > screenDimensions.x)
-        {
-            x = screenDimensions.x - (panelDimensions.x / 2);
-        }
-        else if(panelPosition.x - (panelDimensions.x / 2) < 0)
-        {
-            x = panelDimensions.x / 2;
-        }
+            if (panelPosition.x + (panelDimensions.x / 2) > boundaryDimensions.x)
+            {
+                x = boundaryDimensions.x - (panelDimensions.x / 2);
+            }
+            else if(panelPosition.x - (panelDimensions.x / 2) < 0)
+            {
+                x = panelDimensions.x / 2;
+            }
 
-        if (panelPosition.y + (panelDimensions.y / 2) > screenDimensions.y)
-        {
-            y = screenDimensions.y - (panelDimensions.y / 2);
+            if (panelPosition.y + (panelDimensions.y / 2) > boundaryDimensions.y)
+            {
+                y = boundaryDimensions.y - (panelDimensions.y / 2);
+            }
+            else if (panelPosition.y - (panelDimensions.y / 2) < 0)
+            {
+                y = panelDimensions.y / 2;
+            }
+
+            this.transform.position = new Vector2(x, y);
         }
-        else if (panelPosition.y - (panelDimensions.y / 2) < 0)
-        {
-            y = panelDimensions.y / 2;
+        else{
+            Vector2 panelPosition = this.transform.localPosition;
+            Vector2 panelDimensions = new Vector2(this.GetComponent<RectTransform>().sizeDelta.x, this.GetComponent<RectTransform>().sizeDelta.y);
+            Vector2 boundaryDimensions = new Vector2(boundingImage.sizeDelta.x/2 , boundingImage.sizeDelta.y/2);
+
+            float x = panelPosition.x, y = panelPosition.y;
+
+            if (panelPosition.x + (panelDimensions.x / 2) > boundaryDimensions.x)
+            {
+                x = boundaryDimensions.x - (panelDimensions.x / 2);
+            }
+            else if(panelPosition.x - (panelDimensions.x / 2) < -boundaryDimensions.x)
+            {
+                x = -boundaryDimensions.x - panelDimensions.x / 2;
+            }
+
+            if (panelPosition.y + (panelDimensions.y / 2) > boundaryDimensions.y)
+            {
+                y = boundaryDimensions.y - (panelDimensions.y / 2);
+            }
+            else if (panelPosition.y - (panelDimensions.y / 2) < -boundaryDimensions.y)
+            {
+                y = -boundaryDimensions.y - panelDimensions.y / 2;
+            }
+
+            this.transform.localPosition = new Vector2(x, y);       
         }
-        this.transform.position = new Vector2(x, y);
+       
     }
 
     public void CalculateOffset()
