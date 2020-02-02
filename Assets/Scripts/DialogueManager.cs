@@ -22,12 +22,13 @@ public class DialogueManager : MonoBehaviour
 
     void Start()
     {
-
+       //createPlayerTextBoxes("test");
     }
 
     void Update()
     {
         updateDisplayedText();
+        
     }
 
     public void ReceiveCurrentCheckPointInfo(List<ExcelReader> checkPointData)
@@ -54,7 +55,7 @@ public class DialogueManager : MonoBehaviour
 
     public void createPlayerTextBoxes(string text)
     {
-        GameObject instance = Instantiate(PlayerWindowPrefab, new Vector3(Random.Range(0, Screen.width), Random.Range(0, Screen.height ), 0), transform.rotation) as GameObject;
+        GameObject instance = Instantiate(PlayerWindowPrefab, new Vector3(Screen.width / 3, Screen.height * 0.2f, 0), transform.rotation) as GameObject;
         instance.transform.parent = Canvas.transform;
         Transform t = instance.GetComponentInChildren<Transform>().Find("Text");
 
