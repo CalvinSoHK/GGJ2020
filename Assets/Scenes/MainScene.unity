@@ -2526,6 +2526,7 @@ MonoBehaviour:
   WindowPrefab: {fileID: 7030816932906294104, guid: e44bb8a1f0995414286eac383bae6da9,
     type: 3}
   Canvas: {fileID: 1607983901}
+  TextSize: {fileID: 456182790}
 --- !u!4 &1578246139
 Transform:
   m_ObjectHideFlags: 0

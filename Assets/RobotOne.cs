@@ -11,6 +11,7 @@ public class RobotOne : MonoBehaviour, IPatient
     GameObject allText;
     GameObject textDisplayer;
 
+    List<ExcelReader> nameData;
     List<ExcelReader> checkpointData;
 
     //Enum for what checkpoint we're on
@@ -61,7 +62,7 @@ public class RobotOne : MonoBehaviour, IPatient
     void SetupTextData()
     {
        //ParseCSV data = allText.GetComponent<ParseCSV>();
-        List<ExcelReader> nameData = data.GetDataByName("ShyRobot");
+        nameData = data.GetDataByName("ShyRobot");
         //Debug.Log(nameData[0].speaker);
         string checkPointValue = "";
 
