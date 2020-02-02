@@ -52,8 +52,8 @@ public class ScoreThenLoadBack : MonoBehaviour
     }
 
     public void LoadBack(){
-        //gameStateSystem.ResetDict();
-        //stateSystem.ResetDict();
+        gameStateSystem.ResetDict();
+        stateSystem.ResetDict();
         SceneManager.LoadScene(0, LoadSceneMode.Additive);
         SceneManager.sceneLoaded += UnloadScene;
     }
