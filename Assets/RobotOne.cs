@@ -15,7 +15,7 @@ public class RobotOne : MonoBehaviour, IPatient
 
     int firstCheckPoint = 3, secondCheckPoint = 3, thirdCheckPoint = 3; // 1 = success, 2 = fail, 3 = inProgress
 
-    public enum RoboDialogueStates { Setup, DetermineCheckpoint, WaitToDisplayText, DisplayText, Over }; //The states that could occur for the moving of the object
+    public enum RoboDialogueStates { Setup, DetermineCheckpoint, WaitToDisplayText, DisplayText, Over, Idle }; //The states that could occur for the moving of the object
     public RoboDialogueStates currentRoboDState = RoboDialogueStates.Setup;
     float timeOnStateChange = 0.0f;
     string checkPointValue = "None";
@@ -96,7 +96,15 @@ public class RobotOne : MonoBehaviour, IPatient
                 break;
 
             case RoboDialogueStates.Over:
+                if(Time.time - timeOnStateChange > 3)
+                {
+                    GameOver();
+                    setCurrentState(RoboDialogueStates.Idle);
+                }
                 Debug.Log("GAME OVER");
+                break;
+
+            case RoboDialogueStates.Idle:
                 break;
         }
 
@@ -236,6 +244,8 @@ public class RobotOne : MonoBehaviour, IPatient
             case CheckPointProgress.Two:
                 if (isThirdCheckpoint())
                 {
+                    Debug.Log("THREE IS GO");
+                    PlayerResponse();
                     checkpoint = CheckPointProgress.Three;
                     currentLinearCheck = 0;
                 }
@@ -260,6 +270,7 @@ public class RobotOne : MonoBehaviour, IPatient
 
     void FailedThirdCheckPoint()
     {
+        Debug.Log("FAILED THIRD");
         thirdCheckPoint = 2;
         string text = data.allData[35].text;
         checkpoint = CheckPointProgress.Three;
@@ -273,7 +284,9 @@ public class RobotOne : MonoBehaviour, IPatient
         List<string> responses = new List<string>();
         foreach (ExcelReader er in playerData)
         {
-            if (er.checkpoint == checkPointValue && er.special.Trim().Equals("Ending".Trim()))
+            Debug.Log(er.special.Trim().Equals("Ending".Trim()));
+            //Debug.Log(er.special);
+            if (er.checkpoint.Trim().Equals(checkPointValue.Trim()) && er.special.Trim().Equals("Ending".Trim()))
             {
                 responses.Add(er.text);
             }
@@ -281,6 +294,11 @@ public class RobotOne : MonoBehaviour, IPatient
         Debug.Log(responses.Count);
         string response = responses[Random.Range(0, responses.Count)];
         textDisplayer.GetComponent<DialogueManager>().createPlayerTextBoxes(response);
+    }
+
+    void GameOver ()
+    {
+        textDisplayer.GetComponent<DialogueManager>().createPlayerTextBoxes("Thank you for getting your repairs. Hopefully it helps");
     }
 
 
