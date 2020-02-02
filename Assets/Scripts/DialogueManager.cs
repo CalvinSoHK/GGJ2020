@@ -12,9 +12,12 @@ public class DialogueManager : MonoBehaviour
     public GameObject CurrentRobot;
     public GameObject WindowPrefab;
     public GameObject Canvas;
+    public Text TextSize;
     private TestRobot CurrentRobotScript;
     private Text CurrentRobotText;
     private BrunoMikoski.TextJuicer.JuicedText JuicedTextReference;
+
+    List<Text> displayedText = new List<Text>();
 
     void Start()
     {
@@ -23,7 +26,7 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
-        
+        updateDisplayedText();
     }
 
     public void ReceiveCurrentCheckPointInfo(List<ExcelReader> checkPointData)
@@ -43,6 +46,30 @@ public class DialogueManager : MonoBehaviour
         Transform t = instance.GetComponentInChildren<Transform>().Find("Text");
 
         t.gameObject.GetComponent<Text>().text = text;
+        displayedText.Add(t.gameObject.GetComponent<Text>());
+    }
+
+    public void updateDisplayedText()
+    {
+        float num;
+        string text = TextSize.text;
+        float.TryParse(text, out num);
+        foreach (Text obj in displayedText)
+        {
+
+
+            if (num <= 3)
+            {
+                obj.fontSize = 1;
+            }
+            else
+            {
+                obj.fontSize = (int)num / 3;
+                Debug.Log(text);
+
+            }
+
+        }
     }
 
     /// <summary>
