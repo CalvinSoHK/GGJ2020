@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ParseCSV : MonoBehaviour
 {
-    List<ExcelReader> allData = new List<ExcelReader>();
+    public List<ExcelReader> allData = new List<ExcelReader>();
     bool doneParsing = false;
     // Start is called before the first frame update
     void Start()
@@ -30,6 +30,7 @@ public class ParseCSV : MonoBehaviour
             er.checkpoint = row[3];
             er.notes = row[4];
             er.type = row[5];
+            er.special = row[6];
 
             allData.Add(er);
         }
@@ -53,7 +54,7 @@ public class ParseCSV : MonoBehaviour
 
         foreach (ExcelReader er in allData)
         {
-            if(er.speaker == "ShyRobot")
+            if(er.speaker.Trim().Equals( id.Trim()))
             {
                 nameData.Add(er);
             }

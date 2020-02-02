@@ -11,10 +11,14 @@ public class DialogueManager : MonoBehaviour
     //Variables relevant to the current robot the player is dealing with
     public GameObject CurrentRobot;
     public GameObject WindowPrefab;
+    public GameObject PlayerWindowPrefab;
     public GameObject Canvas;
+    public Text TextSize;
     private TestRobot CurrentRobotScript;
     private Text CurrentRobotText;
     private BrunoMikoski.TextJuicer.JuicedText JuicedTextReference;
+
+    List<Text> displayedText = new List<Text>();
 
     void Start()
     {
@@ -23,7 +27,7 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
-        
+        updateDisplayedText();
     }
 
     public void ReceiveCurrentCheckPointInfo(List<ExcelReader> checkPointData)
@@ -43,6 +47,38 @@ public class DialogueManager : MonoBehaviour
         Transform t = instance.GetComponentInChildren<Transform>().Find("Text");
 
         t.gameObject.GetComponent<Text>().text = text;
+        displayedText.Add(t.gameObject.GetComponent<Text>());
+    }
+
+    public void createPlayerTextBoxes(string text)
+    {
+        GameObject instance = Instantiate(PlayerWindowPrefab, new Vector3(Random.Range(0, Screen.width * 0.8f), Random.Range(0, Screen.height * 0.8f), 0), transform.rotation) as GameObject;
+        instance.transform.parent = Canvas.transform;
+        Transform t = instance.GetComponentInChildren<Transform>().Find("Text");
+
+        t.gameObject.GetComponent<Text>().text = text;
+        displayedText.Add(t.gameObject.GetComponent<Text>());
+    }
+
+    public void updateDisplayedText()
+    {
+        float num;
+        string text = TextSize.text;
+        float.TryParse(text, out num);
+        foreach (Text obj in displayedText)
+        {
+
+
+            if (num <= 3)
+            {
+                obj.fontSize = 1;
+            }
+            else
+            {
+                obj.fontSize = (int)num / 3;
+            }
+
+        }
     }
 
     /// <summary>

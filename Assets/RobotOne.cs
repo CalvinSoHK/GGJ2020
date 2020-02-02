@@ -11,6 +11,16 @@ public class RobotOne : MonoBehaviour, IPatient
     GameObject allText;
     GameObject textDisplayer;
 
+    public float messageInterval = 1f;
+
+    int firstCheckPoint = 3, secondCheckPoint = 3, thirdCheckPoint = 3; // 1 = success, 2 = fail, 3 = inProgress
+
+    public enum RoboDialogueStates { Setup, DetermineCheckpoint, WaitToDisplayText, DisplayText, Over }; //The states that could occur for the moving of the object
+    public RoboDialogueStates currentRoboDState = RoboDialogueStates.Setup;
+    float timeOnStateChange = 0.0f;
+    string checkPointValue = "None";
+
+    List<ExcelReader> nameData, playerData;
     List<ExcelReader> checkpointData;
 
     //Enum for what checkpoint we're on
@@ -24,6 +34,8 @@ public class RobotOne : MonoBehaviour, IPatient
     public float volumeGoal = 80;
 
     public float brightnessGoal = 80;
+
+    int currentLinearCheck = 0;
 
     ParseCSV data;
     bool setup = false, looping = false;
@@ -40,20 +52,62 @@ public class RobotOne : MonoBehaviour, IPatient
 
     void Update()
     {
-        if(data.doneParsingData() && !setup)
+        switch(currentRoboDState)
         {
-            Debug.Log("here twice");
-            SetupTextData();
-            setup = true;
+            case RoboDialogueStates.Setup:
+                if (data.doneParsingData())
+                {
+                    SetupTextData();
+                    setCurrentState(RoboDialogueStates.DetermineCheckpoint);
+                }
+                break;
+            case RoboDialogueStates.DetermineCheckpoint:
+                CheckPointCompletionCheck();
+                GetCheckpointData(nameData, checkPointValue);
+                //have a check to see if reached last checkpoint
+                if(checkPointValue.Trim().Equals("Three".Trim()))
+                {
+                    setCurrentState(RoboDialogueStates.Over);
+                }
+                else
+                {
+                    setCurrentState(RoboDialogueStates.WaitToDisplayText);
+                }
+
+                break;
+
+            case RoboDialogueStates.WaitToDisplayText:
+                if(Time.time - timeOnStateChange > messageInterval)
+                {
+                    setCurrentState(RoboDialogueStates.DisplayText);
+                }
+                break;
+            case RoboDialogueStates.DisplayText:
+                Debug.Log(checkpointData[0].type.Trim());
+                if (checkpointData[0].type.Trim().Equals("Loop".Trim()))
+                {
+                    loop(checkpointData);
+                }
+                else if(checkpointData[0].type.Trim().Equals("Linear".Trim()))
+                {
+                    linear(checkpointData);
+                }
+                setCurrentState(RoboDialogueStates.DetermineCheckpoint);
+                break;
+
+            case RoboDialogueStates.Over:
+                Debug.Log("GAME OVER");
+                break;
         }
 
-        if(looping)
-        {
-            if(Time.time - lastLoop > 5.0)
-            {
-                loop(checkpointData);
-            }
-        }
+
+        //if(looping)
+        //{
+        //    if(Time.time - lastLoop > 5.0)
+        //    {
+        //        loop(checkpointData);
+        //    }
+        //}
     }
 
 
@@ -61,9 +115,16 @@ public class RobotOne : MonoBehaviour, IPatient
     void SetupTextData()
     {
        //ParseCSV data = allText.GetComponent<ParseCSV>();
-        List<ExcelReader> nameData = data.GetDataByName("ShyRobot");
+        nameData = data.GetDataByName("ShyRobot");
+        playerData = data.GetDataByName("Player");
+        SetupCheckPoint();
         //Debug.Log(nameData[0].speaker);
-        string checkPointValue = "";
+
+    }
+
+    void SetupCheckPoint()
+    {
+        checkPointValue = "";
 
         switch (checkpoint)
         {
@@ -95,7 +156,6 @@ public class RobotOne : MonoBehaviour, IPatient
                 checkPointValue = "Eigth";
                 break;
         }
-        GetCheckpointData(nameData, checkPointValue);
     }
 
     void GetCheckpointData(List<ExcelReader> nameData, string checkpoint)
@@ -108,12 +168,12 @@ public class RobotOne : MonoBehaviour, IPatient
                 checkpointData.Add(er);
             }
         }
-        Debug.Log(checkpointData[0].type.Trim().Equals("Loop".Trim()) );
-        if(checkpointData[0].type.Trim().Equals("Loop".Trim()))
-        {
-            loop(checkpointData);
-            looping = true;
-        }
+        //Debug.Log(checkpointData[0].type.Trim().Equals("Loop".Trim()) );
+        //if(checkpointData[0].type.Trim().Equals("Loop".Trim()))
+        //{
+        //    loop(checkpointData);
+        //    looping = true;
+        //}
         //textDisplayer.GetComponent<DialogueManager>().ReceiveCurrentCheckPointInfo(checkpointData);
     }
 
@@ -122,9 +182,106 @@ public class RobotOne : MonoBehaviour, IPatient
     {
         ExcelReader element = data[Random.Range(0, data.Count)];
         textDisplayer.GetComponent<DialogueManager>().createTheTextBoxes(element.text);
-        lastLoop = Time.time;
+        //lastLoop = Time.time;
     }
 
+    void linear(List<ExcelReader> data)
+    {
+        if(currentLinearCheck < data.Count)
+        {
+            ExcelReader element = data[currentLinearCheck];
+            textDisplayer.GetComponent<DialogueManager>().createTheTextBoxes(element.text);
+        }
+        else
+        {
+            Debug.Log("FAILED CHECKPOINT");
+            Debug.Log(checkPointValue);
+            if(checkPointValue.Trim().Equals("One".Trim()))
+            {
+                FailedSecondCheckPoint();
+            }
+            else if (checkPointValue.Trim().Equals("Two".Trim()))
+            {
+                FailedThirdCheckPoint();
+            }
+
+        }
+
+        currentLinearCheck += 1;
+    }
+
+    void CheckPointCompletionCheck()
+    {
+        switch (checkpoint)
+        {
+            case CheckPointProgress.None:
+                if(isFirstCheckpoint())
+                {
+                    Debug.Log("COMPLETE");
+                    PlayerResponse();
+                    firstCheckPoint = 1;
+                    currentLinearCheck = 0;
+                    //Call the Individual Success Response for Success
+                    checkpoint = CheckPointProgress.One;
+                }
+                break;
+            case CheckPointProgress.One:
+                if (isSecondCheckpoint())
+                {
+                    secondCheckPoint = 1;
+                    currentLinearCheck = 0;
+                    checkpoint = CheckPointProgress.Two;
+                }
+                break;
+            case CheckPointProgress.Two:
+                if (isThirdCheckpoint())
+                {
+                    checkpoint = CheckPointProgress.Three;
+                    currentLinearCheck = 0;
+                }
+                break;
+            case CheckPointProgress.Three:
+                Debug.Log("DONE");
+                break;
+        }
+        SetupCheckPoint();
+
+    }
+
+    void FailedSecondCheckPoint()
+    {
+        secondCheckPoint = 2;
+        string text = data.allData[23].text;
+        checkpoint = CheckPointProgress.Two;
+        textDisplayer.GetComponent<DialogueManager>().createPlayerTextBoxes(text);
+        currentLinearCheck = 0;
+        SetupCheckPoint();
+    }
+
+    void FailedThirdCheckPoint()
+    {
+        thirdCheckPoint = 2;
+        string text = data.allData[35].text;
+        checkpoint = CheckPointProgress.Three;
+        textDisplayer.GetComponent<DialogueManager>().createPlayerTextBoxes(text);
+        currentLinearCheck = 0;
+        SetupCheckPoint();
+    }
+
+    void PlayerResponse ()
+    {
+        List<string> responses = new List<string>();
+        foreach (ExcelReader er in playerData)
+        {
+            if (er.checkpoint == checkPointValue && er.special.Trim().Equals("Ending".Trim()))
+            {
+                responses.Add(er.text);
+            }
+        }
+        Debug.Log(responses.Count);
+        string response = responses[Random.Range(0, responses.Count)];
+        textDisplayer.GetComponent<DialogueManager>().createPlayerTextBoxes(response);
+    }
 
 
     public void Init()
@@ -169,5 +326,24 @@ public class RobotOne : MonoBehaviour, IPatient
 
     public CheckPointProgress GetCheckpointProgress(){
         return checkpoint;
+    }
+
+    /// <summary>
+    /// update the current Typing State.
+    /// </summary>
+    /// <param name="newState"></param>
+    public void setCurrentState(RoboDialogueStates newState)
+    {
+        currentRoboDState = newState;
+        timeOnStateChange = Time.time;
+    }
+
+    /// <summary>
+    /// check how much time has passed since the last state change.
+    /// </summary>
+    /// <returns></returns>
+    public float getStateElapsed()
+    {
+        return Time.time - timeOnStateChange;
     }
 }
