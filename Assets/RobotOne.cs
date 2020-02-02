@@ -11,7 +11,7 @@ public class RobotOne : MonoBehaviour, IPatient
     GameObject allText;
     GameObject textDisplayer;
 
-    public float messageInterval = 1f;
+    public float messageInterval = 5f;
 
     int firstCheckPoint = 3, secondCheckPoint = 3, thirdCheckPoint = 3; // 1 = success, 2 = fail, 3 = inProgress
 
