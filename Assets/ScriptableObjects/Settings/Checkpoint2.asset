@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f283d0e96a0c47d48951f26b7abaf64d, type: 3}
   m_Name: Checkpoint2
   m_EditorClassIdentifier: 
-  temperature: 84.5
-  brightness: 54.3
-  volume: 9.9
-  redX: 0
-  redY: 0
-  yellowX: 0
-  yellowY: 0
-  blueX: 0
-  blueY: 0
+  temperature: 65
+  brightness: 10
+  volume: 80
+  redX: 50
+  redY: 20
+  yellowX: 50
+  yellowY: 20
+  blueX: 50
+  blueY: 20
