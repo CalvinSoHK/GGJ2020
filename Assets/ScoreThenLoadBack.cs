@@ -26,14 +26,11 @@ public class ScoreThenLoadBack : MonoBehaviour
     public int ScorePlayer(){
         int score = 0;
         if(stateSystem.IsFlag(GGJ2020.Utility.FlagEnum.Checkpoint2)){
-            Debug.Log("Checkpoint2 was right.");
             score++;
         }
         if(stateSystem.IsFlag(GGJ2020.Utility.FlagEnum.Checkpoint3)){
-            Debug.Log("Checkpoint3 was right.");
             score++;
         }
-        Debug.Log("Score is: " + score);
         return score;
     }
 

@@ -13,7 +13,7 @@ public class PullValue : MonoBehaviour
     public float value = 0;
 
     void Update(){
-        if(SystemCache.Instance.gameStateSystem.isReady){
+        if(SystemCache.Instance.gameStateSystem != null){
             value = SystemCache.Instance.gameStateSystem.GetValue(PULL_ENUM);
         }       
     }
