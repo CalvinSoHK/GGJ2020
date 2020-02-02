@@ -11,9 +11,10 @@ namespace GGJ2020.Utility
     /// </summary>
     public enum FlagEnum
     {
-        IsMean,
-        IsNice,
-        IsLoving,
+        Checkpoint1,
+        Checkpoint2,
+        Checkpoint3,
+        FaceCovered,
         Null
     }
 
@@ -44,5 +45,26 @@ namespace GGJ2020.Utility
         Red,
         Blue,
         Yellow
+    }
+
+    public enum RobotType
+    {
+        ShyBot,
+        ArchaicBot,
+        FutureBot
+    }
+
+    public enum CheckPointProgress
+    {
+        None,
+        One,
+        Two,
+        Three,
+        Four,
+        Five,
+        Six,
+        Seven,
+        Eight,
+        Finished
     }
 }

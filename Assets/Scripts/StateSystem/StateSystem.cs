@@ -17,7 +17,7 @@ public class StateSystem : ScriptableObject
     /// Initializes the Flag Dictionary with all flags.
     /// <summary>
     public void InitDict(){
-         FlagEnum flag = FlagEnum.IsMean;
+         FlagEnum flag = FlagEnum.Checkpoint1;
          while(flag != FlagEnum.Null){
             flag_dict.TryAdd(flag, false);
             flag++;

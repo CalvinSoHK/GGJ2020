@@ -121,7 +121,7 @@ public class GameStateSystem : ScriptableObject
     ///Since we are working with floats, we should just check they are within reason
     ///<summary>
     public bool isSimilar(float value1, float value2){
-        if(Mathf.Abs(value1 - value2) <= 0.2f){
+        if(Mathf.Abs(value1 - value2) <= 10f){
             return true;
         }
         return false;
