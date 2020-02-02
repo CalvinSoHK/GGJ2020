@@ -7,12 +7,14 @@ using GGJ2020.Utility;
 ///<summary>
 ///Slider for temperature
 ///<summary>
-public class TemperatureSlider : MonoBehaviour, IMessagable
+public class SliderMessager : MonoBehaviour, IMessagable
 {
+    public GameEnum PULL_ENUM;
+
     /// <summary>
     /// Sends messages to gameStateSystem about temperature.
     /// <summary>
     public void SendMessage(GameStateSystem gameStateSystem){
-        gameStateSystem.SetValue(GameEnum.Temperature, GetComponent<Slider>().value);
+        gameStateSystem.SetValue(PULL_ENUM, GetComponent<Slider>().value);
     }
 }

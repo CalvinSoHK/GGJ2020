@@ -17,12 +17,16 @@ public class GameStateSystem : ScriptableObject
     //Contains solution for
     public SettingsObject solution;
 
+    //Whether or not we're ready for polled values.
+    public bool isReady = false;
+
     public void InitDict(){
          GameEnum flag = GameEnum.Temperature;
          while(flag != GameEnum.Null){
             game_dict.Add(flag, 0.5f);
             flag++;
          }
+         isReady = true;
     }
 
     ///<summary>
@@ -68,10 +72,28 @@ public class GameStateSystem : ScriptableObject
                 case GameEnum.Volume:
                     value = settings.volume;
                     break;
+                case GameEnum.RedX:
+                    value = settings.redX;
+                    break;
+                case GameEnum.RedY:
+                    value = settings.redY;
+                    break;
+                case GameEnum.BlueX:
+                    value = settings.blueX;
+                    break;
+                case GameEnum.BlueY:
+                    value = settings.blueY;
+                    break;
+                case GameEnum.YellowX:
+                    value = settings.yellowX;
+                    break;
+                case GameEnum.YellowY:
+                    value = settings.yellowY;
+                    break;
                 default:
                     throw new System.Exception("Calvin: Enum has not yet been integrated into dictionary.");
             }
-            if(game_dict[flag] != value){
+            if(!isSimilar(value, GetValue(flag))) {
                 return false;
             }
             flag++;
@@ -90,6 +112,18 @@ public class GameStateSystem : ScriptableObject
     ///Returns the values of the given variable in the dictionary.
     ///<summary>
     public float GetValue(GameEnum variable){
-        return game_dict[variable];
+        float returnVal;
+        game_dict.TryGetValue(variable, out returnVal);
+        return returnVal;
+    }
+
+    ///<summary>
+    ///Since we are working with floats, we should just check they are within reason
+    ///<summary>
+    public bool isSimilar(float value1, float value2){
+        if(Mathf.Abs(value1 - value2) <= 0.2f){
+            return true;
+        }
+        return false;
     }
 }
