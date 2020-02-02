@@ -309,6 +309,7 @@ public class RobotOne : MonoBehaviour, IPatient
     {
         //This robot needs volume tuned up to 80, around that value it will be good.
         if(gameStateSystem.isSimilar(gameStateSystem.GetValue(GGJ2020.Utility.GameEnum.Volume), volumeGoal)){
+            stateSystem.SetFlag(FlagEnum.Checkpoint1, true);
             return true;
         }
         return false;
@@ -318,6 +319,7 @@ public class RobotOne : MonoBehaviour, IPatient
     {
         //This robot needs the screen to cover his face to move on. Check for the flag.
         if(stateSystem.IsFlag(GGJ2020.Utility.FlagEnum.FaceCovered)){
+            stateSystem.SetFlag(FlagEnum.Checkpoint2, true);
             return true;
         }
         return false;
@@ -326,6 +328,7 @@ public class RobotOne : MonoBehaviour, IPatient
     public bool isThirdCheckpoint()
     {
         if(gameStateSystem.isSimilar(gameStateSystem.GetValue(GGJ2020.Utility.GameEnum.Brightness), brightnessGoal)){
+            stateSystem.SetFlag(FlagEnum.Checkpoint3, true);
             return true;
         }
         return false;
