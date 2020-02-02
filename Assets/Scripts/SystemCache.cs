@@ -14,6 +14,8 @@ public class SystemCache : Singleton<SystemCache>
 
     public GameStateSystem gameStateSystem;
 
+    public GameObject TextData;
+
     void Start(){
         stateSystem.InitDict();
         gameStateSystem.InitDict();
