@@ -38,6 +38,8 @@ public class RobotOne : MonoBehaviour, IPatient
 
     int currentLinearCheck = 0;
 
+    private float timer = 20f;
+
     ParseCSV data;
     bool setup = false, looping = false;
     float lastLoop = 0.0f;
@@ -45,67 +47,83 @@ public class RobotOne : MonoBehaviour, IPatient
     void Start(){
         gameStateSystem = SystemCache.Instance.gameStateSystem;
         stateSystem = SystemCache.Instance.stateSystem;
-        allText = SystemCache.Instance.textData;
-        textDisplayer = SystemCache.Instance.textDisplayer;
-        data = allText.GetComponent<ParseCSV>();
+        if(SystemCache.Instance.isReady){
+            allText = SystemCache.Instance.textData;
+            textDisplayer = SystemCache.Instance.textDisplayer;
+            data = allText.GetComponent<ParseCSV>();
+        }
+       
         //SetupTextData();
     }
 
     void Update()
     {
-        switch(currentRoboDState)
-        {
-            case RoboDialogueStates.Setup:
-                if (data.doneParsingData())
-                {
-                    SetupTextData();
-                    setCurrentState(RoboDialogueStates.DetermineCheckpoint);
-                }
-                break;
-            case RoboDialogueStates.DetermineCheckpoint:
-                CheckPointCompletionCheck();
-                GetCheckpointData(nameData, checkPointValue);
-                //have a check to see if reached last checkpoint
-                if(checkPointValue.Trim().Equals("Three".Trim()))
-                {
-                    setCurrentState(RoboDialogueStates.Over);
-                }
-                else
-                {
-                    setCurrentState(RoboDialogueStates.WaitToDisplayText);
-                }
-
-                break;
-
-            case RoboDialogueStates.WaitToDisplayText:
-                if(Time.time - timeOnStateChange > messageInterval)
-                {
-                    setCurrentState(RoboDialogueStates.DisplayText);
-                }
-                break;
-            case RoboDialogueStates.DisplayText:
-                if (checkpointData[0].type.Trim().Equals("Loop".Trim()))
-                {
-                    loop(checkpointData);
-                }
-                else if(checkpointData[0].type.Trim().Equals("Linear".Trim()))
-                {
-                    linear(checkpointData);
-                }
-                setCurrentState(RoboDialogueStates.DetermineCheckpoint);
-                break;
-
-            case RoboDialogueStates.Over:
-                if(Time.time - timeOnStateChange > 3)
-                {
-                    Complete();
-                    setCurrentState(RoboDialogueStates.Idle);
-                }
-                break;
-
-            case RoboDialogueStates.Idle:
-                break;
+        if(allText == null){
+            if(SystemCache.Instance.isReady){
+                allText = SystemCache.Instance.textData;
+                textDisplayer = SystemCache.Instance.textDisplayer;
+                data = allText.GetComponent<ParseCSV>();
+            }
         }
+        else{
+             switch(currentRoboDState)
+            {
+                case RoboDialogueStates.Setup:
+                    if (data.doneParsingData())
+                    {
+                        SetupTextData();
+                        setCurrentState(RoboDialogueStates.DetermineCheckpoint);
+                    }
+                    break;
+                case RoboDialogueStates.DetermineCheckpoint:
+                    CheckPointCompletionCheck();
+                    GetCheckpointData(nameData, checkPointValue);
+                    //have a check to see if reached last checkpoint
+                    if(checkPointValue.Trim().Equals("Four".Trim()))
+                    {
+                        setCurrentState(RoboDialogueStates.Over);
+                    }
+                    else
+                    {
+                        setCurrentState(RoboDialogueStates.WaitToDisplayText);
+                    }
+
+                    break;
+
+                case RoboDialogueStates.WaitToDisplayText:
+                    if(Time.time - timeOnStateChange > messageInterval)
+                    {
+                        setCurrentState(RoboDialogueStates.DisplayText);
+                    }
+                    break;
+                case RoboDialogueStates.DisplayText:
+                    if (checkpointData[0].type.Trim().Equals("Loop".Trim()))
+                    {
+                        loop(checkpointData);
+                    }
+                    else if(checkpointData[0].type.Trim().Equals("Linear".Trim()))
+                    {
+                        linear(checkpointData);
+                    }
+                    setCurrentState(RoboDialogueStates.DetermineCheckpoint);
+                    break;
+
+                case RoboDialogueStates.Over:
+                    if(Time.time - timeOnStateChange > 10)
+                    {
+                        Complete();
+                        setCurrentState(RoboDialogueStates.Idle);
+                    }
+                    break;
+
+                case RoboDialogueStates.Idle:
+                    break;
+            }
+        
+        }
+            
+
+       
 
 
         //if(looping)
@@ -249,10 +267,30 @@ public class RobotOne : MonoBehaviour, IPatient
                 }
                 break;
             case CheckPointProgress.Three:
+                    if(GetScore() == 0){
+                        textDisplayer.GetComponent<DialogueManager>().createTheTextBoxes("...How do you deal with the world?");
+                    }
+                    else if(GetScore() == 1){
+                        textDisplayer.GetComponent<DialogueManager>().createTheTextBoxes("Oh! It's... a bit better...");
+                    }
+                    else if(GetScore() == 2){
+                        textDisplayer.GetComponent<DialogueManager>().createTheTextBoxes("Thanks doc! This is just like the simulations!");
+                    }
+                checkpoint = CheckPointProgress.Four;
                 break;
         }
         SetupCheckPoint();
+    }
 
+    public int GetScore(){
+        int score = 0;
+        if(stateSystem.IsFlag(GGJ2020.Utility.FlagEnum.Checkpoint2)){
+            score++;
+        }
+        if(stateSystem.IsFlag(GGJ2020.Utility.FlagEnum.Checkpoint3)){
+            score++;
+        }
+        return score;
     }
 
     void FailedSecondCheckPoint()
@@ -303,7 +341,14 @@ public class RobotOne : MonoBehaviour, IPatient
 
     public void Complete()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(3, LoadSceneMode.Additive);
+        SceneManager.sceneLoaded += UnloadScene;
+    }
+
+    public void UnloadScene(Scene scene, LoadSceneMode mode){
+        SceneManager.sceneLoaded -= UnloadScene;
+        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(3));
+        SceneManager.UnloadScene(SceneManager.GetSceneByBuildIndex(2));
     }
 
     public bool isFirstCheckpoint()

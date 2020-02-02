@@ -17,16 +17,13 @@ public class GameStateSystem : ScriptableObject
     //Contains solution for
     public SettingsObject solution;
 
-    //Whether or not we're ready for polled values.
-    public bool isReady = false;
-
     public void InitDict(){
-         GameEnum flag = GameEnum.Temperature;
-         while(flag != GameEnum.Null){
+        GameEnum flag = GameEnum.Temperature;
+        while(flag != GameEnum.Null){
             game_dict.Add(flag, 0.5f);
             flag++;
-         }
-         isReady = true;
+        }
+           
     }
 
     public void ResetDict(){
@@ -35,6 +32,7 @@ public class GameStateSystem : ScriptableObject
             SetValue(flag, 0);
             flag++;
          }
+         Debug.Log("Exit Reset");
     }
 
     ///<summary>

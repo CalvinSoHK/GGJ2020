@@ -19,9 +19,10 @@ public class StateSystem : ScriptableObject
     public void InitDict(){
          FlagEnum flag = FlagEnum.Checkpoint1;
          while(flag != FlagEnum.Null){
-            flag_dict.TryAdd(flag, false);
-            flag++;
+             flag_dict.TryAdd(flag, false);
+             flag++;
          }
+
     }
 
     public void ResetDict(){
@@ -30,6 +31,7 @@ public class StateSystem : ScriptableObject
             SetFlag(flag, false);
             flag++;
          }
+           Debug.Log("Exit Reset");
     }
 
     /// <summary>
