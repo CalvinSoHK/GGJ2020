@@ -83,7 +83,6 @@ public class RobotOne : MonoBehaviour, IPatient
                 }
                 break;
             case RoboDialogueStates.DisplayText:
-                Debug.Log(checkpointData[0].type.Trim());
                 if (checkpointData[0].type.Trim().Equals("Loop".Trim()))
                 {
                     loop(checkpointData);
@@ -98,10 +97,9 @@ public class RobotOne : MonoBehaviour, IPatient
             case RoboDialogueStates.Over:
                 if(Time.time - timeOnStateChange > 3)
                 {
-                    GameOver();
+                    Complete();
                     setCurrentState(RoboDialogueStates.Idle);
                 }
-                Debug.Log("GAME OVER");
                 break;
 
             case RoboDialogueStates.Idle:
@@ -202,8 +200,6 @@ public class RobotOne : MonoBehaviour, IPatient
         }
         else
         {
-            Debug.Log("FAILED CHECKPOINT");
-            Debug.Log(checkPointValue);
             if(checkPointValue.Trim().Equals("One".Trim()))
             {
                 FailedSecondCheckPoint();
@@ -225,7 +221,6 @@ public class RobotOne : MonoBehaviour, IPatient
             case CheckPointProgress.None:
                 if(isFirstCheckpoint())
                 {
-                    Debug.Log("COMPLETE");
                     PlayerResponse();
                     firstCheckPoint = 1;
                     currentLinearCheck = 0;
@@ -234,8 +229,11 @@ public class RobotOne : MonoBehaviour, IPatient
                 }
                 break;
             case CheckPointProgress.One:
+               
                 if (isSecondCheckpoint())
                 {
+                    Debug.Log("checkpoint 2 bab,...");
+                    PlayerResponse();
                     secondCheckPoint = 1;
                     currentLinearCheck = 0;
                     checkpoint = CheckPointProgress.Two;
@@ -244,14 +242,12 @@ public class RobotOne : MonoBehaviour, IPatient
             case CheckPointProgress.Two:
                 if (isThirdCheckpoint())
                 {
-                    Debug.Log("THREE IS GO");
                     PlayerResponse();
                     checkpoint = CheckPointProgress.Three;
                     currentLinearCheck = 0;
                 }
                 break;
             case CheckPointProgress.Three:
-                Debug.Log("DONE");
                 break;
         }
         SetupCheckPoint();
@@ -270,7 +266,6 @@ public class RobotOne : MonoBehaviour, IPatient
 
     void FailedThirdCheckPoint()
     {
-        Debug.Log("FAILED THIRD");
         thirdCheckPoint = 2;
         string text = data.allData[35].text;
         checkpoint = CheckPointProgress.Three;
@@ -284,14 +279,12 @@ public class RobotOne : MonoBehaviour, IPatient
         List<string> responses = new List<string>();
         foreach (ExcelReader er in playerData)
         {
-            Debug.Log(er.special.Trim().Equals("Ending".Trim()));
             //Debug.Log(er.special);
             if (er.checkpoint.Trim().Equals(checkPointValue.Trim()) && er.special.Trim().Equals("Ending".Trim()))
             {
                 responses.Add(er.text);
             }
         }
-        Debug.Log(responses.Count);
         string response = responses[Random.Range(0, responses.Count)];
         textDisplayer.GetComponent<DialogueManager>().createPlayerTextBoxes(response);
     }
