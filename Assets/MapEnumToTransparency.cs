@@ -22,8 +22,7 @@ public class MapEnumToTransparency : MonoBehaviour
     }
 
     void Update(){
-        Color newColor = originalColor;
-        newColor.a = pull.value/100f;
+        Color newColor = new Color(pull.value / 100f, pull.value / 100f, pull.value / 100f);
         image.color = newColor;
     }
 }

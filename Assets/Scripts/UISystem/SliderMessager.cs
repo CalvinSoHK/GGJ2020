@@ -11,6 +11,11 @@ public class SliderMessager : MonoBehaviour, IMessagable
 {
     public GameEnum PULL_ENUM;
 
+    void Start()
+    {
+        SendMessage(SystemCache.Instance.gameStateSystem);
+    }
+
     /// <summary>
     /// Sends messages to gameStateSystem about temperature.
     /// <summary>
