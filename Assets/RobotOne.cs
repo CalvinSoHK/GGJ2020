@@ -16,7 +16,7 @@ public class RobotOne : MonoBehaviour, IPatient
 
     int firstCheckPoint = 3, secondCheckPoint = 3, thirdCheckPoint = 3; // 1 = success, 2 = fail, 3 = inProgress
 
-    public enum RoboDialogueStates { Setup, DetermineCheckpoint, WaitToDisplayText, DisplayText, Over }; //The states that could occur for the moving of the object
+    public enum RoboDialogueStates { Setup, DetermineCheckpoint, WaitToDisplayText, DisplayText, Over, Idle }; //The states that could occur for the moving of the object
     public RoboDialogueStates currentRoboDState = RoboDialogueStates.Setup;
     float timeOnStateChange = 0.0f;
     string checkPointValue = "None";
@@ -84,7 +84,6 @@ public class RobotOne : MonoBehaviour, IPatient
                 }
                 break;
             case RoboDialogueStates.DisplayText:
-                Debug.Log(checkpointData[0].type.Trim());
                 if (checkpointData[0].type.Trim().Equals("Loop".Trim()))
                 {
                     loop(checkpointData);
@@ -97,7 +96,14 @@ public class RobotOne : MonoBehaviour, IPatient
                 break;
 
             case RoboDialogueStates.Over:
-                Debug.Log("GAME OVER");
+                if(Time.time - timeOnStateChange > 3)
+                {
+                    Complete();
+                    setCurrentState(RoboDialogueStates.Idle);
+                }
+                break;
+
+            case RoboDialogueStates.Idle:
                 break;
         }
 
@@ -195,8 +201,6 @@ public class RobotOne : MonoBehaviour, IPatient
         }
         else
         {
-            Debug.Log("FAILED CHECKPOINT");
-            Debug.Log(checkPointValue);
             if(checkPointValue.Trim().Equals("One".Trim()))
             {
                 FailedSecondCheckPoint();
@@ -218,7 +222,6 @@ public class RobotOne : MonoBehaviour, IPatient
             case CheckPointProgress.None:
                 if(isFirstCheckpoint())
                 {
-                    Debug.Log("COMPLETE");
                     PlayerResponse();
                     firstCheckPoint = 1;
                     currentLinearCheck = 0;
@@ -227,8 +230,11 @@ public class RobotOne : MonoBehaviour, IPatient
                 }
                 break;
             case CheckPointProgress.One:
+               
                 if (isSecondCheckpoint())
                 {
+                    Debug.Log("checkpoint 2 bab,...");
+                    PlayerResponse();
                     secondCheckPoint = 1;
                     currentLinearCheck = 0;
                     checkpoint = CheckPointProgress.Two;
@@ -237,12 +243,12 @@ public class RobotOne : MonoBehaviour, IPatient
             case CheckPointProgress.Two:
                 if (isThirdCheckpoint())
                 {
+                    PlayerResponse();
                     checkpoint = CheckPointProgress.Three;
                     currentLinearCheck = 0;
                 }
                 break;
             case CheckPointProgress.Three:
-                Debug.Log("DONE");
                 break;
         }
         SetupCheckPoint();
@@ -274,14 +280,19 @@ public class RobotOne : MonoBehaviour, IPatient
         List<string> responses = new List<string>();
         foreach (ExcelReader er in playerData)
         {
-            if (er.checkpoint == checkPointValue && er.special.Trim().Equals("Ending".Trim()))
+            //Debug.Log(er.special);
+            if (er.checkpoint.Trim().Equals(checkPointValue.Trim()) && er.special.Trim().Equals("Ending".Trim()))
             {
                 responses.Add(er.text);
             }
         }
-        Debug.Log(responses.Count);
         string response = responses[Random.Range(0, responses.Count)];
         textDisplayer.GetComponent<DialogueManager>().createPlayerTextBoxes(response);
+    }
+
+    void GameOver ()
+    {
+        textDisplayer.GetComponent<DialogueManager>().createPlayerTextBoxes("Thank you for getting your repairs. Hopefully it helps");
     }
 
 
@@ -299,6 +310,7 @@ public class RobotOne : MonoBehaviour, IPatient
     {
         //This robot needs volume tuned up to 80, around that value it will be good.
         if(gameStateSystem.isSimilar(gameStateSystem.GetValue(GGJ2020.Utility.GameEnum.Volume), volumeGoal)){
+            stateSystem.SetFlag(FlagEnum.Checkpoint1, true);
             return true;
         }
         return false;
@@ -308,6 +320,7 @@ public class RobotOne : MonoBehaviour, IPatient
     {
         //This robot needs the screen to cover his face to move on. Check for the flag.
         if(stateSystem.IsFlag(GGJ2020.Utility.FlagEnum.FaceCovered)){
+            stateSystem.SetFlag(FlagEnum.Checkpoint2, true);
             return true;
         }
         return false;
@@ -316,6 +329,7 @@ public class RobotOne : MonoBehaviour, IPatient
     public bool isThirdCheckpoint()
     {
         if(gameStateSystem.isSimilar(gameStateSystem.GetValue(GGJ2020.Utility.GameEnum.Brightness), brightnessGoal)){
+            stateSystem.SetFlag(FlagEnum.Checkpoint3, true);
             return true;
         }
         return false;

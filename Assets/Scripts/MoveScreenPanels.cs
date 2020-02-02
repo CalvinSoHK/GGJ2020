@@ -118,9 +118,9 @@ public class MoveScreenPanels : MonoBehaviour, IPointerDownHandler, IPointerUpHa
             {
                 y = boundaryDimensions.y - (panelDimensions.y / 2);
             }
-            else if (panelPosition.y - (panelDimensions.y / 2) < 0)
+            else if (panelPosition.y - (panelDimensions.y * 3) < 0)
             {
-                y = panelDimensions.y / 2;
+                y = panelDimensions.y * 6;
             }
 
             this.transform.position = new Vector2(x, y);

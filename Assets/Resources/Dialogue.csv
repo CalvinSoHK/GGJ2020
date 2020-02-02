@@ -34,9 +34,9 @@ Textline ID,Said by,Text,CheckPoint,Notes,Type,Special
 33,ShyRobot,...Why is everything so miserable...,Two,Responses not covered by UI in the third phase.,Linear,No
 34,ShyRobot,...Is it like this all the time?,Two,Responses not covered by UI in the third phase.,Linear,No
 35,ShyRobot,...Red...stress...,Two,Responses not covered by UI in the third phase.,Linear,No
-36,Player,Things are just like that all the time.,Two,Response at the end of third phase.,Player,No
-37,Player,Well things are better sometimes.,Two,Response at the end of the third phase.,Player,No
-38,Player,The world is definitely more fun! Just look around!,Two,Response at the end of the third phase after fixing brightness and color grading.,Player,No
+36,Player,Things are just like that all the time.,Two,Response at the end of third phase.,Player,Fail
+37,Player,Well things are better sometimes.,Two,Response at the end of the third phase.,Player,Fail
+38,Player,The world is definitely more fun! Just look around!,Two,Response at the end of the third phase after fixing brightness and color grading.,Player,Ending
 39,ShyRobot,Thanks doc! Everything looks so much better.,Three,Response if player fixed all the problems.,End,Ending
 40,ShyRobot,Oh! It's... better!,Three,Response if player fixed brightness/color but not covering the patient.,End,Ending
 41,ShyRobot,...How do you deal with it?,Three,Response if the player only fixed the volume.,End,Ending
