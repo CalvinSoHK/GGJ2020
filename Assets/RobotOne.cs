@@ -38,6 +38,8 @@ public class RobotOne : MonoBehaviour, IPatient
 
     int currentLinearCheck = 0;
 
+    private float timer = 20f;
+
     ParseCSV data;
     bool setup = false, looping = false;
     float lastLoop = 0.0f;
@@ -77,7 +79,7 @@ public class RobotOne : MonoBehaviour, IPatient
                     CheckPointCompletionCheck();
                     GetCheckpointData(nameData, checkPointValue);
                     //have a check to see if reached last checkpoint
-                    if(checkPointValue.Trim().Equals("Three".Trim()))
+                    if(checkPointValue.Trim().Equals("Four".Trim()))
                     {
                         setCurrentState(RoboDialogueStates.Over);
                     }
@@ -107,7 +109,7 @@ public class RobotOne : MonoBehaviour, IPatient
                     break;
 
                 case RoboDialogueStates.Over:
-                    if(Time.time - timeOnStateChange > 3)
+                    if(Time.time - timeOnStateChange > 10)
                     {
                         Complete();
                         setCurrentState(RoboDialogueStates.Idle);
@@ -265,10 +267,30 @@ public class RobotOne : MonoBehaviour, IPatient
                 }
                 break;
             case CheckPointProgress.Three:
+                    if(GetScore() == 0){
+                        textDisplayer.GetComponent<DialogueManager>().createTheTextBoxes("...How do you deal with the world?");
+                    }
+                    else if(GetScore() == 1){
+                        textDisplayer.GetComponent<DialogueManager>().createTheTextBoxes("Oh! It's... a bit better...");
+                    }
+                    else if(GetScore() == 2){
+                        textDisplayer.GetComponent<DialogueManager>().createTheTextBoxes("Thanks doc! This is just like the simulations!");
+                    }
+                checkpoint = CheckPointProgress.Four;
                 break;
         }
         SetupCheckPoint();
+    }
 
+    public int GetScore(){
+        int score = 0;
+        if(stateSystem.IsFlag(GGJ2020.Utility.FlagEnum.Checkpoint2)){
+            score++;
+        }
+        if(stateSystem.IsFlag(GGJ2020.Utility.FlagEnum.Checkpoint3)){
+            score++;
+        }
+        return score;
     }
 
     void FailedSecondCheckPoint()
