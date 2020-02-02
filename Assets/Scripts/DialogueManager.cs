@@ -10,6 +10,8 @@ public class DialogueManager : MonoBehaviour
 
     //Variables relevant to the current robot the player is dealing with
     public GameObject CurrentRobot;
+    public GameObject WindowPrefab;
+    public GameObject Canvas;
     private TestRobot CurrentRobotScript;
     private Text CurrentRobotText;
     private BrunoMikoski.TextJuicer.JuicedText JuicedTextReference;
@@ -22,6 +24,25 @@ public class DialogueManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void ReceiveCurrentCheckPointInfo(List<ExcelReader> checkPointData)
+    {
+        //Debug.Log("here BLAOIHE");
+        //GameObject instance = Instantiate(WindowPrefab, new Vector3(Random.Range(0, Screen.width * 0.8f), Random.Range(0, Screen.height * 0.8f), 0), transform.rotation) as GameObject;
+        //instance.transform.parent = Canvas.transform;
+        //Transform t = instance.GetComponentInChildren<Transform>().Find("Text");
+
+        //t.gameObject.GetComponent<Text>().text = checkPointData[0].text;
+    }
+
+    public void createTheTextBoxes(string text)
+    {
+        GameObject instance = Instantiate(WindowPrefab, new Vector3(Random.Range(0, Screen.width * 0.8f), Random.Range(0, Screen.height * 0.8f), 0), transform.rotation) as GameObject;
+        instance.transform.parent = Canvas.transform;
+        Transform t = instance.GetComponentInChildren<Transform>().Find("Text");
+
+        t.gameObject.GetComponent<Text>().text = text;
     }
 
     /// <summary>

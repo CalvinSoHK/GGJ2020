@@ -9,6 +9,7 @@ public class ExcelReader
     public int id;
     public string speaker;
     public string text;
-    public string empty;
+    public string checkpoint;
     public string notes;
+    public string type;
 }

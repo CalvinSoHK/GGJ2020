@@ -1,51 +1,51 @@
-Textline ID,Said by,Text,,Notes
-1,ShyRobot,...,,When volume is off
-2,ShyRobot,...!      .... ....,,When volume is off
-3,ShyRobot,...........? ..........................,,When volume is off
-4,ShyRobot,....? ...! .....,,When volume is off
-5,Player,Can you speak up?,,"Responses when volume is off or low, keeps looping till the player fixes volume"
-6,Player,Is something wrong?,,"Responses when volume is off or low, keeps looping till the player fixes volume"
-7,Player,...?,,"Responses when volume is off or low, keeps looping till the player fixes volume"
-8,Shy Robot,Hello...?,,Response when volume is still low but increasing.
-9,Shy Robot,Hey! I'm talking...,,Response when volume is still low but increasing.
-10,Shy Robot,Please? Will someone hear me?,,Response when volume is still low but increasing.
-11,ShyRobot,Maybe? You hear me! Actually... there's no way.,,Response when volume is still low but increasing.
-12,Player,I fixed it. Try speaking now.,,Response that marks the end of checkpoint 1
-13,Player,Everything's okay now.,,Response that marks the end of checkpoint 2
-14,Player,Why did you lower your own volume settings...?,,Response that marks the end of checkpoint 3
-15,Shy Robot,Oh! You can hear me... Ummm... well...,,"Responses trying to explain the problem, without being covered by UI"
-16,Shy Robot,It's nice you can hear me but... what do I even say...,,"Responses trying to explain the problem, without being covered by UI"
-17,Shy Robot,...Umm... Oh god you're looking at me...,,"Responses trying to explain the problem, without being covered by UI"
-18,Shy Robot,....! Please don't...,,"Responses trying to explain the problem, without being covered by UI"
-19,Shy Robot,... Uh... Hi...? Oh no I made the mad...,,"Responses trying to explain the problem, without being covered by UI"
-20,Shy Robot,Oh their UI is blocking me out! ,,Response to behing covered by the UI
-21,Shy Robot,This is so much less nerve-wracking...,,Response to behing covered by the UI
-22,Shy Robot,Maybe they'll help me out?,,Response to behing covered by the UI
-23,Player,Can you stop being so rude?,,Player response when the robot finishes this segment.
-24,Player,Just get to the point please.,,Player response when the robot finishes this segment.
-25,Player,"Go on, just tell me what's wrong.",,Player response when the robot finishes this segment. Only available if UI covering the robot
-26,Shy Robot,Well everything is just so much darker than I expected... Out here in the real world I mean.,,"Responses when covered by UI, in the third phase"
-27,Shy Robot,There's just so much blood red everywhere!,,"Responses when covered by UI, in the third phase"
-28,Shy Robot,I thought there'd be more light...,,"Responses when covered by UI, in the third phase"
-29,Shy Robot,Maybe some more blues?,,"Responses when covered by UI, in the third phase"
-30,Shy Robot,Is the world just that scary?,,"Responses when covered by UI, in the third phase"
-31,Shy Robot,... Well.... dark?,,"Responses not covered by UI, in the third phase."
-32,Shy Robot,...Ummm.. how do I put this...,,"Responses not covered by UI, in the third phase."
-33,Shy Robot,...Why is everything so miserable...,,"Responses not covered by UI, in the third phase."
-34,Shy Robot,...Is it like this all the time?,,"Responses not covered by UI, in the third phase."
-35,Shy Robot,...Red...stress...,,"Responses not covered by UI, in the third phase."
-36,Player,Things are just like that all the time.,,Response at the end of third phase.
-37,Player,Well things are better sometimes.,,Response at the end of the third phase.
-38,Player,The world is definitely more fun! Just look around!,,Response at the end of the third phase after fixing brightness and color grading.
-39,Shy Robot,Thanks doc! Everything looks so much better.,,Response if player fixed all the problems.
-40,Shy Robot,Oh! It's... better!,,Response if player fixed brightness/color but not covering the patient.
-41,Shy Robot,...How do you deal with it?,,Response if the player only fixed the volume.
-42,Player,We all deal with it. Life is just dark.,,Response the player can choose if they only fixed volume.
-43,Player ,Life can be happy even in the state it's in.,,Response the player can choose if they only fixed volume.
-44,Player,The world is as it is. Nothing we can do about it.,,Response the player can choose if they only fixed volume.
-45,Player,"It's okay, things are much brighter now.",,Response the player can choose if they fixed brightness/color but not covering the patient.
-46,Player,Go on and enjoy those colors.,,Response the player can choose if they fixed brightness/color but not covering the patient.
-47,Player,"Now you can see better, everything should be fine.",,Response the player can choose if they fixed brightness/color but not covering the patient.
-48,Player,All the physical problems are fixed. But to fully heal you need to be yourself.,,Response if the player fixed everything
-49,Player,"Don't worry, everything's fine now. I believe in you little buddy.",,Response if the player fixed everything
-50,Player,"Come on now, things are all good. Good luck out there kiddo.",,Response if the player fixed everything
+Textline ID,Said by,Text,CheckPoint,Notes,Type
+1,ShyRobot,...,None,When volume is off,Loop
+2,ShyRobot,...!      .... ....,None,When volume is off,Loop
+3,ShyRobot,...........? ..........................,None,When volume is off,Loop
+4,ShyRobot,....? ...! .....,None,When volume is off,Loop
+5,Player,Can you speak up?,None,"Responses when volume is off or low, keeps looping till the player fixes volume",Player
+6,Player,Is something wrong?,None,"Responses when volume is off or low, keeps looping till the player fixes volume",Player
+7,Player,...?,None,"Responses when volume is off or low, keeps looping till the player fixes volume",Player
+8,ShyRobot,Hello...?,None,Response when volume is still low but increasing.,Loop
+9,ShyRobot,Hey! I'm talking...,None,Response when volume is still low but increasing.,Loop
+10,ShyRobot,Please? Will someone hear me?,None,Response when volume is still low but increasing.,Loop
+11,ShyRobot,Maybe? You hear me! Actually... there's no way.,None,Response when volume is still low but increasing.,Loop
+12,Player,I fixed it. Try speaking now.,One,Response that marks the end of checkpoint 1,Player
+13,Player,Everything's okay now.,One,Response that marks the end of checkpoint 2,Player
+14,Player,Why did you lower your own volume settings...?,One,Response that marks the end of checkpoint 3,Player
+15,ShyRobot,Oh! You can hear me... Ummm... well...,One,"Responses trying to explain the problem, without being covered by UI",Linear
+16,ShyRobot,It's nice you can hear me but... what do I even say...,One,"Responses trying to explain the problem, without being covered by UI",Linear
+17,ShyRobot,...Umm... Oh god you're looking at me...,One,"Responses trying to explain the problem, without being covered by UI",Linear
+18,ShyRobot,....! Please don't...,One,"Responses trying to explain the problem, without being covered by UI",Linear
+19,ShyRobot,... Uh... Hi...? Oh no I made the mad...,One,"Responses trying to explain the problem, without being covered by UI",Linear
+20,ShyRobot,Oh their UI is blocking me out! ,One,Response to behing covered by the UI,Linear
+21,ShyRobot,This is so much less nerve-wracking...,One,Response to behing covered by the UI,Linear
+22,ShyRobot,Maybe they'll help me out?,One,Response to behing covered by the UI,Linear
+23,Player,Can you stop being so rude?,One,Player response when the robot finishes this segment.,Player
+24,Player,Just get to the point please.,One,Player response when the robot finishes this segment.,Player
+25,Player,"Go on, just tell me what's wrong.",One,Player response when the robot finishes this segment. Only available if UI covering the robot,Player
+26,ShyRobot,Well everything is just so much darker than I expected... Out here in the real world I mean.,Two,"Responses when covered by UI, in the third phase",Linear
+27,ShyRobot,There's just so much blood red everywhere!,Two,"Responses when covered by UI, in the third phase",Linear
+28,ShyRobot,I thought there'd be more light...,Two,"Responses when covered by UI, in the third phase",Linear
+29,ShyRobot,Maybe some more blues?,Two,"Responses when covered by UI, in the third phase",Linear
+30,ShyRobot,Is the world just that scary?,Two,"Responses when covered by UI, in the third phase",Linear
+31,ShyRobot,... Well.... dark?,Two,"Responses not covered by UI, in the third phase.",Linear
+32,ShyRobot,...Ummm.. how do I put this...,Two,"Responses not covered by UI, in the third phase.",Linear
+33,ShyRobot,...Why is everything so miserable...,Two,"Responses not covered by UI, in the third phase.",Linear
+34,ShyRobot,...Is it like this all the time?,Two,"Responses not covered by UI, in the third phase.",Linear
+35,ShyRobot,...Red...stress...,Two,"Responses not covered by UI, in the third phase.",Linear
+36,Player,Things are just like that all the time.,Two,Response at the end of third phase.,Player
+37,Player,Well things are better sometimes.,Two,Response at the end of the third phase.,Player
+38,Player,The world is definitely more fun! Just look around!,Two,Response at the end of the third phase after fixing brightness and color grading.,Player
+39,ShyRobot,Thanks doc! Everything looks so much better.,End,Response if player fixed all the problems.,End
+40,ShyRobot,Oh! It's... better!,End,Response if player fixed brightness/color but not covering the patient.,End
+41,ShyRobot,...How do you deal with it?,End,Response if the player only fixed the volume.,End
+42,Player,We all deal with it. Life is just dark.,End,Response the player can choose if they only fixed volume.,Player
+43,Player ,Life can be happy even in the state it's in.,End,Response the player can choose if they only fixed volume.,Player
+44,Player,The world is as it is. Nothing we can do about it.,End,Response the player can choose if they only fixed volume.,Player
+45,Player,"It's okay, things are much brighter now.",End,Response the player can choose if they fixed brightness/color but not covering the patient.,Player
+46,Player,Go on and enjoy those colors.,End,Response the player can choose if they fixed brightness/color but not covering the patient.,Player
+47,Player,"Now you can see better, everything should be fine.",End,Response the player can choose if they fixed brightness/color but not covering the patient.,Player
+48,Player,All the physical problems are repaired. But to fully heal you need to be yourself.,End,Response if the player fixed everything,Player
+49,Player,"Don't worry, everything's fine now. I believe in you little buddy.",End,Response if the player fixed everything,Player
+50,Player,"Come on now, things are all good. Good luck out there kiddo.",End,Response if the player fixed everything,Player

@@ -15,6 +15,13 @@ public class SystemCache : Singleton<SystemCache>
     [SerializeField]
     public GameStateSystem gameStateSystem;
 
+    [SerializeField]
+    public GameObject textData;
+
+    [SerializeField]
+    public GameObject textDisplayer;
+
+
     void Start(){
         stateSystem.InitDict();
         gameStateSystem.InitDict();
