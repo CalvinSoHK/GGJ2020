@@ -27,6 +27,22 @@ namespace GGJ2020.Utility
         Temperature,
         Brightness,
         Volume,
+        RedX,
+        RedY,
+        BlueX,
+        BlueY,
+        YellowX,
+        YellowY,
         Null
+    }
+
+    /// <summary>
+    /// Color enums for the color picker
+    /// <summary>
+    public enum ColorEnum
+    {
+        Red,
+        Blue,
+        Yellow
     }
 }

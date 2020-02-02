@@ -42,4 +42,11 @@ public class UIHoverEffect : MonoBehaviour
     {
         hoverEnabled = value;
     }
+
+    ///<summary>
+    ///Needs to be called after being moved by player
+    ///<summary>
+    public void ResetOriginalPos(){
+        original_pos = transform.GetComponent<RectTransform>().localPosition;
+    }
 }

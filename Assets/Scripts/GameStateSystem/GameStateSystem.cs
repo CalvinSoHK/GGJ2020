@@ -72,6 +72,24 @@ public class GameStateSystem : ScriptableObject
                 case GameEnum.Volume:
                     value = settings.volume;
                     break;
+                case GameEnum.RedX:
+                    value = settings.redX;
+                    break;
+                case GameEnum.RedY:
+                    value = settings.redY;
+                    break;
+                case GameEnum.BlueX:
+                    value = settings.blueX;
+                    break;
+                case GameEnum.BlueY:
+                    value = settings.blueY;
+                    break;
+                case GameEnum.YellowX:
+                    value = settings.yellowX;
+                    break;
+                case GameEnum.YellowY:
+                    value = settings.yellowY;
+                    break;
                 default:
                     throw new System.Exception("Calvin: Enum has not yet been integrated into dictionary.");
             }
