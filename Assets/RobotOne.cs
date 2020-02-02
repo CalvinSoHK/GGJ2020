@@ -66,7 +66,7 @@ public class RobotOne : MonoBehaviour, IPatient
         return robot;
     }
 
-    public CheckPointProgress GetCheckPointProgress(){
+    public CheckPointProgress GetCheckpointProgress(){
         return checkpoint;
     }
 }

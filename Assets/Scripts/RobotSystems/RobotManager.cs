@@ -27,10 +27,10 @@ public class RobotManager : MonoBehaviour
         Complete
     }
 
-    public ManagerState state = ManagerState.Idle;
+    ManagerState state = ManagerState.Idle;
 
-    public NextState(){
-        if(state < (int)ManagerState.Complete){
+    public void NextState(){
+        if((int)state < (int)(ManagerState.Complete)){
             state++;
         }
     }
@@ -55,8 +55,9 @@ public class RobotManager : MonoBehaviour
                 if(cur_patient.isThirdCheckpoint()){
                     NextState();
                 }
+                break;
             case ManagerState.Complete:
-                SceneManager.LoadScene(next_scene);
+                SceneManager.LoadScene(next_scene.name);
                 break;
             default:
                 throw new System.Exception("Error: Reached manager state that's not implemented: " + state);
