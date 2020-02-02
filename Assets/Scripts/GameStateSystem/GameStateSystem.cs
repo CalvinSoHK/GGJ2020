@@ -29,6 +29,14 @@ public class GameStateSystem : ScriptableObject
          isReady = true;
     }
 
+    public void ResetDict(){
+         GameEnum flag = GameEnum.Temperature;
+         while(flag != GameEnum.Null){
+            SetValue(flag, 0);
+            flag++;
+         }
+    }
+
     ///<summary>
     ///Sets the whole dictionary to the values in a given settings
     ///<summary>
