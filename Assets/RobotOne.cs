@@ -61,4 +61,12 @@ public class RobotOne : MonoBehaviour, IPatient
         }
         return false;
     }
+
+    public RobotType GetRobotType(){
+        return robot;
+    }
+
+    public CheckPointProgress GetCheckPointProgress(){
+        return checkpoint;
+    }
 }
