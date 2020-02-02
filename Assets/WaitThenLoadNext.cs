@@ -17,11 +17,19 @@ public class WaitThenLoadNext : MonoBehaviour
     {
         if(timer <= 0)
         {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(2, LoadSceneMode.Additive);
+            SceneManager.sceneLoaded += UnloadScene;
         }
         else
         {
             timer -= Time.deltaTime;
         }
+    }
+
+    public void UnloadScene(Scene scene, LoadSceneMode mode)
+    {
+        SceneManager.sceneLoaded -= UnloadScene;
+        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(2));
+        SceneManager.UnloadScene(SceneManager.GetSceneByBuildIndex(1));
     }
 }

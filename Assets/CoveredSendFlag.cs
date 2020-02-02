@@ -17,8 +17,8 @@ public class CoveredSendFlag : MonoBehaviour
     void OnTriggerStay2D()
     {
         if(count_of_covers > 0){
-            Debug.Log("Covered...");
             SystemCache.Instance.stateSystem.SetFlag(GGJ2020.Utility.FlagEnum.FaceCovered, true);
+            Debug.Log("Correct.");
         }
         
     }
@@ -27,7 +27,6 @@ public class CoveredSendFlag : MonoBehaviour
     {
         count_of_covers--;
         if(count_of_covers == 0){
-            Debug.Log("Uncovered");
             SystemCache.Instance.stateSystem.SetFlag(GGJ2020.Utility.FlagEnum.FaceCovered, false);
         }
     }

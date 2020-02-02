@@ -13,15 +13,24 @@ public class StateSystem : ScriptableObject
     //Contains list of flags that are TRUE
     public ConcurrentDictionary<FlagEnum, bool> flag_dict = new ConcurrentDictionary<FlagEnum, bool>();
 
+    public bool isReady = false;
+
     /// <summary>
     /// Initializes the Flag Dictionary with all flags.
     /// <summary>
     public void InitDict(){
-         FlagEnum flag = FlagEnum.Checkpoint1;
-         while(flag != FlagEnum.Null){
-            flag_dict.TryAdd(flag, false);
-            flag++;
+         if(!isReady){
+            FlagEnum flag = FlagEnum.Checkpoint1;
+            while(flag != FlagEnum.Null){
+                flag_dict.TryAdd(flag, false);
+                flag++;
+            }
+            isReady = true;
          }
+         else{
+            Debug.Log("Resetting dictionary: StateSystem");
+            ResetDict();
+         }  
     }
 
     public void ResetDict(){
@@ -30,6 +39,7 @@ public class StateSystem : ScriptableObject
             SetFlag(flag, false);
             flag++;
          }
+           Debug.Log("Exit Reset");
     }
 
     /// <summary>

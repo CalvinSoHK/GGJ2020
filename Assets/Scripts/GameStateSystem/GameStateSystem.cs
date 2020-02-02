@@ -21,12 +21,18 @@ public class GameStateSystem : ScriptableObject
     public bool isReady = false;
 
     public void InitDict(){
-         GameEnum flag = GameEnum.Temperature;
-         while(flag != GameEnum.Null){
+        if(!isReady){
+            GameEnum flag = GameEnum.Temperature;
+            while(flag != GameEnum.Null){
             game_dict.Add(flag, 0.5f);
             flag++;
-         }
-         isReady = true;
+            }
+            isReady = true;
+        }
+        else{
+            Debug.Log("Reseting GameStateSystem");
+            ResetDict();
+        }            
     }
 
     public void ResetDict(){
@@ -35,6 +41,7 @@ public class GameStateSystem : ScriptableObject
             SetValue(flag, 0);
             flag++;
          }
+         Debug.Log("Exit Reset");
     }
 
     ///<summary>
