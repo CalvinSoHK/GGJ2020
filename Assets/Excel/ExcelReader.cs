@@ -12,4 +12,5 @@ public class ExcelReader
     public string checkpoint;
     public string notes;
     public string type;
+    public string special;
 }

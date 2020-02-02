@@ -820,6 +820,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa095abfdb5893845b944a39bbcf28a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  messageInterval: 1
+  currentRoboDState: 0
   checkpoint: 0
   robot: 0
   volumeGoal: 80
@@ -2061,6 +2063,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb90f37285b124aae8dcdff1eb260f68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allData: []
 --- !u!4 &1223838993
 Transform:
   m_ObjectHideFlags: 0
@@ -2524,6 +2527,8 @@ MonoBehaviour:
   currentTypingState: 0
   CurrentRobot: {fileID: 0}
   WindowPrefab: {fileID: 7030816932906294104, guid: e44bb8a1f0995414286eac383bae6da9,
+    type: 3}
+  PlayerWindowPrefab: {fileID: 7175322353049680476, guid: de1acc54127a14efd91c7ca24b6bcd8c,
     type: 3}
   Canvas: {fileID: 1607983901}
   TextSize: {fileID: 456182790}
