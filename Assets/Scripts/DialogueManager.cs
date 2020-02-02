@@ -65,8 +65,6 @@ public class DialogueManager : MonoBehaviour
             else
             {
                 obj.fontSize = (int)num / 3;
-                Debug.Log(text);
-
             }
 
         }

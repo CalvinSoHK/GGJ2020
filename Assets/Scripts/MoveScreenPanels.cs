@@ -165,4 +165,9 @@ public class MoveScreenPanels : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     {
         transform.position = (Input.mousePosition - offset) ;
     }
+
+    public void DestroyWindow()
+    {
+        Destroy(gameObject);
+    }
 }
